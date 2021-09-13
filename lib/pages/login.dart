@@ -93,22 +93,24 @@ class Login extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 11),
-            Row(
-              children: [
-                Text(
-                  "Don't have account?",
-                  style: GoogleFonts.poppins(
-                    color: Colors.white,
+            Padding(
+              padding: const EdgeInsets.only(top: 11, left: 50, right: 50),
+              child: Row(
+                children: [
+                  Text(
+                    "Don't have account?",
+                    style: GoogleFonts.poppins(
+                      color: Colors.white,
+                    ),
                   ),
-                ),
-                SizedBox(width: 5),
-                Text(
-                  'Sign Up',
-                  style: GoogleFonts.poppins(
-                      color: Colors.white, fontWeight: FontWeight.w600),
-                )
-              ],
+                  SizedBox(width: 5),
+                  Text(
+                    'Sign Up',
+                    style: GoogleFonts.poppins(
+                        color: Colors.white, fontWeight: FontWeight.w600),
+                  )
+                ],
+              ),
             ),
           ],
         ),
