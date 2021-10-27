@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:smart_tourism/shared/theme.dart';
+import 'package:smart_tourism/ui/widgets/themebutton.dart';
+import 'package:smart_tourism/ui/widgets/themeinput.dart';
 
 class Signup extends StatelessWidget {
   @override
@@ -8,7 +10,7 @@ class Signup extends StatelessWidget {
       backgroundColor: kbackgroundColor,
       resizeToAvoidBottomInset: false,
       body: Padding(
-        padding: const EdgeInsets.only(top: 90, left: 29, right: 29),
+        padding: const EdgeInsets.only(top: 60, left: 29, right: 29),
         child: Column(
           children: [
             Text(
@@ -20,117 +22,39 @@ class Signup extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             SizedBox(height: 50),
-            Container(
-              height: 50,
-              child: TextFormField(
-                style: putihTextStyle,
-                decoration: InputDecoration(
-                  fillColor: kinputColor,
-                  filled: true,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(defaultradius),
-                    borderSide: BorderSide.none,
-                  ),
-                  hintText: 'Nama',
-                  hintStyle: abuTextStyle,
+            ThemeInput(hintText: 'Name'),
+            SizedBox(height: 19),
+            ThemeInput(hintText: 'Email'),
+            SizedBox(height: 19),
+            TextFormField(
+              obscureText: true,
+              style: putihTextStyle,
+              decoration: InputDecoration(
+                fillColor: kinputColor,
+                filled: true,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(17),
+                  borderSide: BorderSide.none,
+                ),
+                hintText: 'Password',
+                hintStyle: abuTextStyle,
+                suffixIcon: Icon(
+                  Icons.visibility,
+                  color: kabuColor,
                 ),
               ),
             ),
             SizedBox(height: 19),
-            Container(
-              height: 50,
-              child: TextFormField(
-                style: putihTextStyle,
-                decoration: InputDecoration(
-                  fillColor: Color(0xff262A34),
-                  filled: true,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(defaultradius),
-                    borderSide: BorderSide.none,
-                  ),
-                  hintText: 'Username',
-                  hintStyle: abuTextStyle,
-                ),
-              ),
-            ),
+            ThemeInput(hintText: 'Address'),
             SizedBox(height: 19),
-            Container(
-              height: 50,
-              child: TextFormField(
-                style: putihTextStyle,
-                obscureText: true,
-                decoration: InputDecoration(
-                  fillColor: kinputColor,
-                  filled: true,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(defaultradius),
-                    borderSide: BorderSide.none,
-                  ),
-                  hintText: 'Password',
-                  hintStyle: abuTextStyle,
-                  suffixIcon: Icon(
-                    Icons.visibility,
-                    color: kabuColor,
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(height: 19),
-            Container(
-              height: 50,
-              child: TextFormField(
-                style: putihTextStyle,
-                decoration: InputDecoration(
-                  fillColor: kinputColor,
-                  filled: true,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(defaultradius),
-                    borderSide: BorderSide.none,
-                  ),
-                  hintText: 'Alamat',
-                  hintStyle: abuTextStyle,
-                ),
-              ),
-            ),
-            SizedBox(height: 19),
-            Container(
-              height: 50,
-              child: TextFormField(
-                style: putihTextStyle,
-                decoration: InputDecoration(
-                  fillColor: kinputColor,
-                  filled: true,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(defaultradius),
-                    borderSide: BorderSide.none,
-                  ),
-                  hintText: 'No Telepon',
-                  hintStyle: abuTextStyle,
-                ),
-              ),
-            ),
-            SizedBox(height: 50),
-            Container(
+            ThemeInput(hintText: 'Phone'),
+            ThemeButton(
+              title: 'Sign Up',
               width: 286,
-              height: 50,
-              child: TextButton(
-                style: TextButton.styleFrom(
-                  backgroundColor: kPrimaryColor,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(defaultradius),
-                  ),
-                ),
-                onPressed: () {
-                  Navigator.pushNamed(context, '/main-page');
-                },
-                child: Text(
-                  'Sign Up',
-                  style: putihTextStyle.copyWith(
-                    fontSize: 18,
-                    fontWeight: semibold,
-                  ),
-                ),
-              ),
+              margin: EdgeInsets.only(top: 50),
+              onPressed: () {
+                Navigator.pushNamed(context, '/main-page');
+              },
             ),
             Padding(
               padding: const EdgeInsets.only(top: 11, left: 60),

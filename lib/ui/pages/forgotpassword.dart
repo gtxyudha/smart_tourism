@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:smart_tourism/shared/theme.dart';
+import 'package:smart_tourism/ui/widgets/themebutton.dart';
+import 'package:smart_tourism/ui/widgets/themeinput.dart';
 
 class ForgotPassword extends StatelessWidget {
   @override
@@ -20,42 +22,13 @@ class ForgotPassword extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             SizedBox(height: 50),
-            Container(
-              height: 50,
-              child: TextFormField(
-                style: putihTextStyle,
-                decoration: InputDecoration(
-                  fillColor: kinputColor,
-                  filled: true,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(defaultradius),
-                    borderSide: BorderSide.none,
-                  ),
-                  hintText: 'Email',
-                  hintStyle: abuTextStyle,
-                ),
-              ),
-            ),
+            ThemeInput(hintText: 'Email'),
             SizedBox(height: 50),
-            Container(
-              height: 50,
+            ThemeButton(
+              title: 'Send',
               width: 286,
-              child: TextButton(
-                style: TextButton.styleFrom(
-                  backgroundColor: kPrimaryColor,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(defaultradius),
-                  ),
-                ),
-                onPressed: () {},
-                child: Text(
-                  'Send',
-                  style: putihTextStyle.copyWith(
-                    fontSize: 18,
-                    fontWeight: semibold,
-                  ),
-                ),
-              ),
+              margin: EdgeInsets.only(top: 50),
+              onPressed: () {},
             ),
             SizedBox(height: 11),
             Padding(

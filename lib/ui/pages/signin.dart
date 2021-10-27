@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:smart_tourism/shared/theme.dart';
+import 'package:smart_tourism/ui/widgets/themebutton.dart';
+import 'package:smart_tourism/ui/widgets/themeinput.dart';
 
 class SignIn extends StatelessWidget {
   @override
@@ -22,19 +24,7 @@ class SignIn extends StatelessWidget {
               ),
             ),
             SizedBox(height: 128),
-            TextFormField(
-              style: putihTextStyle,
-              decoration: InputDecoration(
-                fillColor: Color(0xff262A34),
-                filled: true,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(defaultradius),
-                  borderSide: BorderSide.none,
-                ),
-                hintText: 'Email',
-                hintStyle: abuTextStyle,
-              ),
-            ),
+            ThemeInput(hintText: 'Email'),
             SizedBox(height: 24),
             TextFormField(
               obscureText: true,
@@ -67,35 +57,13 @@ class SignIn extends StatelessWidget {
                 ),
               ),
             ),
-            // Container(
-            //   alignment: Alignment(1, 0.5),
-            //   child: Text(
-            //     'Forgot My Password?',
-            //     style: putihTextStyle,
-            //   ),
-            // ),
-            SizedBox(height: 87),
-            Container(
+            ThemeButton(
+              title: 'Sign In',
               width: 286,
-              height: 50,
-              child: TextButton(
-                style: TextButton.styleFrom(
-                  backgroundColor: kPrimaryColor,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(defaultradius),
-                  ),
-                ),
-                onPressed: () {
-                  Navigator.pushNamed(context, '/main-page');
-                },
-                child: Text(
-                  'Sign In',
-                  style: putihTextStyle.copyWith(
-                    fontWeight: semibold,
-                    fontSize: 18,
-                  ),
-                ),
-              ),
+              margin: EdgeInsets.only(top: 87),
+              onPressed: () {
+                Navigator.pushNamed(context, '/main-page');
+              },
             ),
             SizedBox(height: 11),
             Padding(
