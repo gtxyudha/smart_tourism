@@ -3,7 +3,11 @@ import 'package:smart_tourism/shared/theme.dart';
 import 'package:smart_tourism/ui/widgets/themebutton.dart';
 import 'package:smart_tourism/ui/widgets/themeinput.dart';
 
+// ignore: must_be_immutable
 class SignIn extends StatelessWidget {
+  TextEditingController passwordController = TextEditingController(text: '');
+  TextEditingController emailController = TextEditingController(text: '');
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,7 +28,10 @@ class SignIn extends StatelessWidget {
               ),
             ),
             SizedBox(height: 128),
-            ThemeInput(hintText: 'Email'),
+            ThemeInput(
+              hintText: 'Email',
+              controller: emailController,
+            ),
             SizedBox(height: 24),
             TextFormField(
               obscureText: true,
@@ -43,6 +50,7 @@ class SignIn extends StatelessWidget {
                   color: kabuColor,
                 ),
               ),
+              controller: passwordController,
             ),
             SizedBox(height: 11),
             Container(

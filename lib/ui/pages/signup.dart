@@ -1,9 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:smart_tourism/cubit/auth_cubit.dart';
 import 'package:smart_tourism/shared/theme.dart';
 import 'package:smart_tourism/ui/widgets/themebutton.dart';
 import 'package:smart_tourism/ui/widgets/themeinput.dart';
 
+// ignore: must_be_immutable
 class Signup extends StatelessWidget {
+  TextEditingController usernameController = TextEditingController(text: '');
+  TextEditingController passwordController = TextEditingController(text: '');
+  TextEditingController emailController = TextEditingController(text: '');
+  TextEditingController alamatController = TextEditingController(text: '');
+  TextEditingController notelpController = TextEditingController(text: '');
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,9 +31,15 @@ class Signup extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             SizedBox(height: 50),
-            ThemeInput(hintText: 'Name'),
+            ThemeInput(
+              hintText: 'Username',
+              controller: usernameController,
+            ),
             SizedBox(height: 19),
-            ThemeInput(hintText: 'Email'),
+            ThemeInput(
+              hintText: 'Email',
+              controller: emailController,
+            ),
             SizedBox(height: 19),
             TextFormField(
               obscureText: true,
@@ -43,17 +58,51 @@ class Signup extends StatelessWidget {
                   color: kabuColor,
                 ),
               ),
+              controller: passwordController,
             ),
             SizedBox(height: 19),
-            ThemeInput(hintText: 'Address'),
+            ThemeInput(
+              hintText: 'Address',
+              controller: alamatController,
+            ),
             SizedBox(height: 19),
-            ThemeInput(hintText: 'Phone'),
-            ThemeButton(
-              title: 'Sign Up',
-              width: 286,
-              margin: EdgeInsets.only(top: 50),
-              onPressed: () {
-                Navigator.pushNamed(context, '/main-page');
+            ThemeInput(
+              hintText: 'Phone',
+              controller: notelpController,
+            ),
+            BlocConsumer<AuthCubit, AuthState>(
+              listener: (context, state) {
+                if (state is AuthSuccess) {
+                  Navigator.pushNamedAndRemoveUntil(
+                      context, '/main-page', (route) => false);
+                } else if (state is Authfailed) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      backgroundColor: Colors.red,
+                      content: Text(state.error),
+                    ),
+                  );
+                }
+              },
+              builder: (context, state) {
+                if (state is AuthLoading) {
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+                return ThemeButton(
+                  title: 'Sign Up',
+                  width: 286,
+                  margin: EdgeInsets.only(top: 50),
+                  onPressed: () {
+                    context.read<AuthCubit>().signUp(
+                        email: emailController.text,
+                        password: passwordController.text,
+                        username: usernameController.text,
+                        alamat: alamatController.text,
+                        notelp: notelpController.text);
+                  },
+                );
               },
             ),
             Padding(
