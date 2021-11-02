@@ -3,9 +3,9 @@ import 'package:smart_tourism/shared/theme.dart';
 import 'package:smart_tourism/ui/widgets/themebutton.dart';
 import 'package:smart_tourism/ui/widgets/themeinput.dart';
 
-// ignore: must_be_immutable
 class ForgotPassword extends StatelessWidget {
-  TextEditingController emailfController = TextEditingController(text: '');
+  final TextEditingController emailfController =
+      TextEditingController(text: '');
   @override
   Widget build(BuildContext context) {
     return Scaffold(

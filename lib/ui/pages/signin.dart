@@ -3,10 +3,10 @@ import 'package:smart_tourism/shared/theme.dart';
 import 'package:smart_tourism/ui/widgets/themebutton.dart';
 import 'package:smart_tourism/ui/widgets/themeinput.dart';
 
-// ignore: must_be_immutable
 class SignIn extends StatelessWidget {
-  TextEditingController passwordController = TextEditingController(text: '');
-  TextEditingController emailController = TextEditingController(text: '');
+  final TextEditingController passwordController =
+      TextEditingController(text: '');
+  final TextEditingController emailController = TextEditingController(text: '');
 
   @override
   Widget build(BuildContext context) {

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:smart_tourism/shared/theme.dart';
 
@@ -11,7 +12,14 @@ class _SplashState extends State<Splash> {
   @override
   void initState() {
     Timer(Duration(seconds: 3), () {
-      Navigator.pushNamed(context, '/login');
+      User? user = FirebaseAuth.instance.currentUser;
+
+      if (user == null) {
+        Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => false);
+      } else {
+        Navigator.pushNamedAndRemoveUntil(
+            context, '/main-page', (route) => false);
+      }
     });
     super.initState();
   }

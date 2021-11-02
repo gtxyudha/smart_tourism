@@ -7,11 +7,15 @@ import 'package:smart_tourism/ui/widgets/themeinput.dart';
 
 // ignore: must_be_immutable
 class Signup extends StatelessWidget {
-  TextEditingController usernameController = TextEditingController(text: '');
-  TextEditingController passwordController = TextEditingController(text: '');
-  TextEditingController emailController = TextEditingController(text: '');
-  TextEditingController alamatController = TextEditingController(text: '');
-  TextEditingController notelpController = TextEditingController(text: '');
+  final TextEditingController usernameController =
+      TextEditingController(text: '');
+  final TextEditingController passwordController =
+      TextEditingController(text: '');
+  final TextEditingController emailController = TextEditingController(text: '');
+  final TextEditingController alamatController =
+      TextEditingController(text: '');
+  final TextEditingController notelpController =
+      TextEditingController(text: '');
 
   @override
   Widget build(BuildContext context) {
