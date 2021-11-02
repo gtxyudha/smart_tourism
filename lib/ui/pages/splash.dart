@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:smart_tourism/cubit/auth_cubit.dart';
 import 'package:smart_tourism/shared/theme.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class Splash extends StatefulWidget {
   @override
@@ -17,6 +19,7 @@ class _SplashState extends State<Splash> {
       if (user == null) {
         Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => false);
       } else {
+        context.read<AuthCubit>().getCurrentUser(user.uid);
         Navigator.pushNamedAndRemoveUntil(
             context, '/main-page', (route) => false);
       }

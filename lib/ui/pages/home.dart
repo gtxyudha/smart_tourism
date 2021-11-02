@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:smart_tourism/cubit/auth_cubit.dart';
 import 'package:smart_tourism/shared/theme.dart';
 import 'package:smart_tourism/ui/widgets/wisatacard.dart';
 import 'package:smart_tourism/ui/widgets/wisatatile.dart';
@@ -7,60 +9,69 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Widget header() {
-      return Container(
-        margin: EdgeInsets.only(
-          top: 30,
-          left: defaultmargin,
-          right: defaultmargin,
-        ),
-        child: Row(
-          children: [
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+      return BlocBuilder<AuthCubit, AuthState>(
+        builder: (context, state) {
+          if (state is AuthSuccess) {
+            return Container(
+              margin: EdgeInsets.only(
+                top: 30,
+                left: defaultmargin,
+                right: defaultmargin,
+              ),
+              child: Row(
                 children: [
-                  Text(
-                    'Welcome, \nDyan Permana Yudha',
-                    style: putihTextStyle.copyWith(
-                      fontSize: 24,
-                      fontWeight: semibold,
-                    ),
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  SizedBox(height: 6),
-                  Container(
-                    height: 40,
-                    child: TextFormField(
-                      style: putihTextStyle,
-                      textAlign: TextAlign.center,
-                      decoration: InputDecoration(
-                        fillColor: kinputColor,
-                        filled: true,
-                        contentPadding: EdgeInsets.all(0),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(defaultradius),
-                          borderSide: BorderSide.none,
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Welcome, \n${state.user.username}',
+                          style: putihTextStyle.copyWith(
+                            fontSize: 24,
+                            fontWeight: semibold,
+                          ),
+                          overflow: TextOverflow.ellipsis,
                         ),
-                        hintText: 'Where  to holiday today?',
-                        hintStyle: abuTextStyle,
+                        SizedBox(height: 6),
+                        Container(
+                          height: 40,
+                          child: TextFormField(
+                            style: putihTextStyle,
+                            textAlign: TextAlign.center,
+                            decoration: InputDecoration(
+                              fillColor: kinputColor,
+                              filled: true,
+                              contentPadding: EdgeInsets.all(0),
+                              border: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.circular(defaultradius),
+                                borderSide: BorderSide.none,
+                              ),
+                              hintText: 'Where  to holiday today?',
+                              hintStyle: abuTextStyle,
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  Container(
+                    width: 60,
+                    height: 60,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                        image: AssetImage('assets/users.png'),
                       ),
                     ),
                   )
                 ],
               ),
-            ),
-            Container(
-              width: 60,
-              height: 60,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                image: DecorationImage(
-                  image: AssetImage('assets/users.png'),
-                ),
-              ),
-            )
-          ],
-        ),
+            );
+          } else {
+            return SizedBox();
+          }
+        },
       );
     }
 

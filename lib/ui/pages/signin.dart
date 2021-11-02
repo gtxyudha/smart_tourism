@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:smart_tourism/cubit/auth_cubit.dart';
 import 'package:smart_tourism/shared/theme.dart';
 import 'package:smart_tourism/ui/widgets/themebutton.dart';
 import 'package:smart_tourism/ui/widgets/themeinput.dart';
@@ -65,12 +67,37 @@ class SignIn extends StatelessWidget {
                 ),
               ),
             ),
-            ThemeButton(
-              title: 'Sign In',
-              width: 286,
-              margin: EdgeInsets.only(top: 87),
-              onPressed: () {
-                Navigator.pushNamed(context, '/main-page');
+            BlocConsumer<AuthCubit, AuthState>(
+              listener: (context, state) {
+                if (state is AuthSuccess) {
+                  Navigator.pushNamedAndRemoveUntil(
+                      context, '/main-page', (route) => false);
+                } else if (state is Authfailed) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      backgroundColor: Colors.red,
+                      content: Text(state.error),
+                    ),
+                  );
+                }
+              },
+              builder: (context, state) {
+                if (state is AuthLoading) {
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+                return ThemeButton(
+                  title: 'Sign In',
+                  width: 286,
+                  margin: EdgeInsets.only(top: 87),
+                  onPressed: () {
+                    context.read<AuthCubit>().signIn(
+                          email: emailController.text,
+                          password: passwordController.text,
+                        );
+                  },
+                );
               },
             ),
             SizedBox(height: 11),

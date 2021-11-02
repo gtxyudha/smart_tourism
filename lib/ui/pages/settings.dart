@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smart_tourism/cubit/auth_cubit.dart';
+import 'package:smart_tourism/cubit/page_cubit.dart';
 import 'package:smart_tourism/ui/widgets/themebutton.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -18,6 +19,7 @@ class Settings extends StatelessWidget {
             ),
           );
         } else if (state is AuthInitial) {
+          context.read<PageCubit>().setPage(0);
           Navigator.pushNamedAndRemoveUntil(
               context, '/login', (route) => false);
         }
