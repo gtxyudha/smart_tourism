@@ -1,19 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:smart_tourism/models/wisata_model.dart';
 import 'package:smart_tourism/shared/theme.dart';
 import 'package:smart_tourism/ui/pages/detail_page.dart';
 
 class WisataCard extends StatelessWidget {
-  final String nama;
-  final String alamat;
-  final String imageUrl;
-  final double rating;
+  final WisataModel wisata;
 
-  const WisataCard({
+  const WisataCard(
+    this.wisata, {
     Key? key,
-    required this.nama,
-    required this.alamat,
-    required this.imageUrl,
-    this.rating = 0.0,
   }) : super(key: key);
 
   @override
@@ -48,7 +43,7 @@ class WisataCard extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(18),
                 image: DecorationImage(
-                  image: AssetImage(imageUrl),
+                  image: NetworkImage(wisata.imageUrl),
                 ),
               ),
               child: Align(
@@ -77,7 +72,7 @@ class WisataCard extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        rating.toString(),
+                        wisata.rating.toString(),
                         style: hitamTextStyle.copyWith(
                           fontWeight: medium,
                         ),
@@ -93,7 +88,7 @@ class WisataCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    nama,
+                    wisata.nama,
                     style: hitamTextStyle.copyWith(
                       fontSize: 18,
                       fontWeight: medium,
@@ -101,7 +96,7 @@ class WisataCard extends StatelessWidget {
                   ),
                   SizedBox(height: 5),
                   Text(
-                    alamat,
+                    wisata.alamat,
                     style: abuTextStyle.copyWith(
                       fontWeight: light,
                     ),

@@ -3,11 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_tourism/cubit/auth_cubit.dart';
 import 'package:smart_tourism/cubit/page_cubit.dart';
+import 'package:smart_tourism/cubit/wisata_cubit.dart';
 import 'package:smart_tourism/ui/pages/forgotpassword.dart';
 import 'package:smart_tourism/ui/pages/signin.dart';
 import 'package:smart_tourism/ui/pages/mainpage.dart';
 import 'package:smart_tourism/ui/pages/signup.dart';
 import 'package:smart_tourism/ui/pages/splash.dart';
+
+import 'cubit/wisata_baru_cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,6 +29,12 @@ class SmartTourism extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => AuthCubit(),
+        ),
+        BlocProvider(
+          create: (context) => WisataCubit(),
+        ),
+        BlocProvider(
+          create: (context) => WisataBaruCubit(),
         )
       ],
       child: MaterialApp(

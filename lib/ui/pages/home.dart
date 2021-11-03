@@ -1,11 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_tourism/cubit/auth_cubit.dart';
+import 'package:smart_tourism/cubit/wisata_baru_cubit.dart';
+import 'package:smart_tourism/cubit/wisata_cubit.dart';
+import 'package:smart_tourism/models/wisata_model.dart';
 import 'package:smart_tourism/shared/theme.dart';
 import 'package:smart_tourism/ui/widgets/wisatacard.dart';
 import 'package:smart_tourism/ui/widgets/wisatatile.dart';
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
+  @override
+  _HomeState createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  @override
+  void initState() {
+    context.read<WisataCubit>().fetchWisata();
+    context.read<WisataBaruCubit>().fetchWisataBaru();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     Widget header() {
@@ -75,50 +90,21 @@ class Home extends StatelessWidget {
       );
     }
 
-    Widget topDestination() {
+    Widget topDestination(List<WisataModel> wisata) {
       return Container(
         margin: EdgeInsets.only(top: 30),
         child: SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(
-            children: [
-              WisataCard(
-                nama: 'Pasar Klewer',
-                alamat: 'Solo City',
-                imageUrl: 'assets/pasarklewer.png',
-                rating: 4.8,
-              ),
-              WisataCard(
-                nama: 'Tengir Park',
-                alamat: 'Ngargoyoso',
-                imageUrl: 'assets/tengirpark.png',
-                rating: 4.7,
-              ),
-              WisataCard(
-                nama: 'Candi Cetho',
-                alamat: 'Karanganyar',
-                imageUrl: 'assets/candicetho.png',
-                rating: 4.8,
-              ),
-              WisataCard(
-                nama: 'Keraton Solo',
-                alamat: 'Solo',
-                imageUrl: 'assets/keratonsolo.png',
-                rating: 5.0,
-              ),
-              WisataCard(
-                nama: 'Balekambang',
-                alamat: 'Solo',
-                imageUrl: 'assets/balekambang.png',
-                rating: 4.8,
-              ),
-            ],
+            children: wisata.map((WisataModel wisata) {
+              return WisataCard(wisata);
+            }).toList(),
           ),
         ),
       );
     }
 
-    Widget newWisata() {
+    Widget newWisata(List<WisataModel> wisata) {
       return Container(
         margin: EdgeInsets.only(
           top: 30,
@@ -135,47 +121,42 @@ class Home extends StatelessWidget {
                 fontWeight: semibold,
               ),
             ),
-            WisataTile(
-              nama: 'Grojogan Sewu',
-              alamat: 'Tawanmangu',
-              imageUrl: 'assets/grojogansewu1.png',
-              rating: 4.5,
-            ),
-            WisataTile(
-              nama: 'Mata Air Pablengan',
-              alamat: 'Matesih',
-              imageUrl: 'assets/mataairpablengan1.png',
-              rating: 4.7,
-            ),
-            WisataTile(
-              nama: 'Pandawa Waterpark',
-              alamat: 'Sukoharjo',
-              imageUrl: 'assets/pandawawaterpark1.png',
-              rating: 4.8,
-            ),
-            WisataTile(
-              nama: 'Pabrik Gula',
-              alamat: 'Colomadu',
-              imageUrl: 'assets/pabrikgula.png',
-              rating: 4.5,
-            ),
-            WisataTile(
-              nama: 'Gunung Sepikul',
-              alamat: 'Sukoharjo',
-              imageUrl: 'assets/gunungsepikul.png',
-              rating: 4.7,
-            ),
+            Column(
+              children: wisata.map((WisataModel wisata) {
+                return WisataTile(wisata);
+              }).toList(),
+            )
           ],
         ),
       );
     }
 
-    return ListView(
-      children: [
-        header(),
-        topDestination(),
-        newWisata(),
-      ],
+    return BlocConsumer<WisataCubit, WisataState>(
+      listener: (context, state) {
+        if (state is WisataFailed) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              backgroundColor: Colors.red,
+              content: Text(state.error),
+            ),
+          );
+        }
+      },
+      builder: (context, state) {
+        if (state is WisataSuccess) {
+          return ListView(
+            children: [
+              header(),
+              topDestination(state.wisata),
+              newWisata(state.wisata),
+            ],
+          );
+        }
+
+        return Center(
+          child: CircularProgressIndicator(),
+        );
+      },
     );
   }
 }

@@ -1,17 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:smart_tourism/models/wisata_model.dart';
 import 'package:smart_tourism/shared/theme.dart';
 
 class WisataTile extends StatelessWidget {
-  final String nama;
-  final String alamat;
-  final String imageUrl;
-  final double rating;
-  const WisataTile({
+  final WisataModel wisata;
+  const WisataTile(
+    this.wisata, {
     Key? key,
-    required this.nama,
-    required this.alamat,
-    required this.imageUrl,
-    this.rating = 0.0,
   }) : super(key: key);
 
   @override
@@ -33,8 +28,8 @@ class WisataTile extends StatelessWidget {
               borderRadius: BorderRadius.circular(18),
               image: DecorationImage(
                 fit: BoxFit.cover,
-                image: AssetImage(
-                  imageUrl,
+                image: NetworkImage(
+                  wisata.imageUrl,
                 ),
               ),
             ),
@@ -44,7 +39,7 @@ class WisataTile extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  nama,
+                  wisata.nama,
                   style: hitamTextStyle.copyWith(
                     fontSize: 18,
                     fontWeight: medium,
@@ -52,7 +47,7 @@ class WisataTile extends StatelessWidget {
                 ),
                 SizedBox(height: 5),
                 Text(
-                  alamat,
+                  wisata.alamat,
                   style: abuTextStyle.copyWith(
                     fontWeight: light,
                   ),
@@ -75,7 +70,7 @@ class WisataTile extends StatelessWidget {
                 ),
               ),
               Text(
-                rating.toString(),
+                wisata.rating.toString(),
                 style: hitamTextStyle.copyWith(
                   fontWeight: medium,
                 ),
