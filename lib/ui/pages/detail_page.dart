@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:smart_tourism/models/wisata_model.dart';
 import 'package:smart_tourism/shared/theme.dart';
-import 'package:smart_tourism/ui/widgets/availabilityitem.dart';
-import 'package:smart_tourism/ui/widgets/photoitem.dart';
 import 'package:smart_tourism/ui/widgets/themebutton.dart';
 
 class DetailPage extends StatelessWidget {
-  const DetailPage({Key? key}) : super(key: key);
+  final WisataModel wisata;
+
+  const DetailPage(this.wisata, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +17,7 @@ class DetailPage extends StatelessWidget {
         decoration: BoxDecoration(
           image: DecorationImage(
             fit: BoxFit.cover,
-            image: AssetImage('assets/pasarklewer.png'),
+            image: NetworkImage(wisata.imageUrl),
           ),
         ),
       );
@@ -73,14 +74,14 @@ class DetailPage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Pasar Klewer',
+                          wisata.nama,
                           style: putihTextStyle.copyWith(
                             fontSize: 24,
                             fontWeight: semibold,
                           ),
                         ),
                         Text(
-                          'Solo',
+                          wisata.alamat,
                           style: putihTextStyle.copyWith(
                             fontSize: 16,
                             fontWeight: light,
@@ -104,7 +105,7 @@ class DetailPage extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        '4.8',
+                        wisata.rating.toString(),
                         style: putihTextStyle.copyWith(
                           fontWeight: medium,
                         ),
@@ -140,30 +141,30 @@ class DetailPage extends StatelessWidget {
                   ),
                   SizedBox(height: 6),
                   Text(
-                    'Dahulu kala, pada zaman pendudukan Jepang di Indonesia, kawasan Pasar Klewer merupakan tempat pemberhentian kereta api yang digunakan sebagai tempat berjualan para pedagang pribumi. Pasar Slompretan ini merupakan tempat para pedagang kecil yang menawarkan barang dagangan berupa kain batik. Mereka meletakkan kain-kain itu dipundaknya sehingga tampak menjuntai tidak beraturan atau berkleweran jika dilihat dari kejauhan.',
+                    wisata.deskripsi,
                     style: hitamTextStyle.copyWith(
                       height: 2,
                     ),
                     textAlign: TextAlign.justify,
                   ),
 
-                  //NOTE PHOTOS
-                  SizedBox(height: 20),
-                  Text(
-                    'Photos',
-                    style: hitamTextStyle.copyWith(
-                      fontSize: 16,
-                      fontWeight: semibold,
-                    ),
-                  ),
-                  SizedBox(height: 6),
-                  Row(
-                    children: [
-                      PhotoItem(imageUrl: 'assets/gambar/pasarklewer1.png'),
-                      PhotoItem(imageUrl: 'assets/gambar/pasarklewer2.png'),
-                      PhotoItem(imageUrl: 'assets/gambar/pasarklewer3.png'),
-                    ],
-                  ),
+                  // //NOTE PHOTOS
+                  // SizedBox(height: 20),
+                  // Text(
+                  //   'Photos',
+                  //   style: hitamTextStyle.copyWith(
+                  //     fontSize: 16,
+                  //     fontWeight: semibold,
+                  //   ),
+                  // ),
+                  // SizedBox(height: 6),
+                  // Row(
+                  //   children: [
+                  //     PhotoItem(imageUrl: 'assets/gambar/pasarklewer1.png'),
+                  //     PhotoItem(imageUrl: 'assets/gambar/pasarklewer2.png'),
+                  //     PhotoItem(imageUrl: 'assets/gambar/pasarklewer3.png'),
+                  //   ],
+                  // ),
 
                   //Note availability
                   SizedBox(height: 20),
@@ -177,25 +178,26 @@ class DetailPage extends StatelessWidget {
                   SizedBox(height: 6),
                   Row(
                     children: [
-                      AvailabilityItem(
-                        textavailability: 'Batik',
+                      Container(
+                        width: 16,
+                        height: 16,
+                        margin: EdgeInsets.only(right: 6),
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage('assets/checklist.png'),
+                          ),
+                        ),
                       ),
-                      AvailabilityItem(
-                        textavailability: 'Jaket',
+                      Expanded(
+                        child: Text(
+                          wisata.kelengkapan,
+                          style: hitamTextStyle,
+                          textAlign: TextAlign.justify,
+                        ),
                       ),
                     ],
                   ),
                   SizedBox(height: 10),
-                  Row(
-                    children: [
-                      AvailabilityItem(
-                        textavailability: 'House Dress',
-                      ),
-                      AvailabilityItem(
-                        textavailability: 'Various Clotes',
-                      ),
-                    ],
-                  ),
                   ThemeButton(
                     title: 'Maps',
                     width: 286,

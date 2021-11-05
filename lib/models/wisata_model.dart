@@ -6,6 +6,8 @@ class WisataModel extends Equatable {
   final String alamat;
   final String imageUrl;
   final double rating;
+  final String deskripsi;
+  final String kelengkapan;
 
   WisataModel({
     required this.id,
@@ -13,6 +15,8 @@ class WisataModel extends Equatable {
     this.alamat = '',
     this.imageUrl = '',
     this.rating = 0.0,
+    this.deskripsi = '',
+    this.kelengkapan = '',
   });
 
   factory WisataModel.fromJson(String id, Map<String, dynamic> json) =>
@@ -22,8 +26,11 @@ class WisataModel extends Equatable {
         alamat: json['alamat'],
         imageUrl: json['imageUrl'],
         rating: json['rating'].toDouble(),
+        deskripsi: json['deskripsi'],
+        kelengkapan: json['kelengkapan'],
       );
 
   @override
-  List<Object?> get props => [id, nama, alamat, imageUrl, rating];
+  List<Object?> get props =>
+      [id, nama, alamat, imageUrl, rating, deskripsi, kelengkapan];
 }

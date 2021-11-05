@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_tourism/cubit/auth_cubit.dart';
-import 'package:smart_tourism/cubit/wisata_baru_cubit.dart';
 import 'package:smart_tourism/cubit/wisata_cubit.dart';
 import 'package:smart_tourism/models/wisata_model.dart';
 import 'package:smart_tourism/shared/theme.dart';
@@ -17,7 +16,6 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     context.read<WisataCubit>().fetchWisata();
-    context.read<WisataBaruCubit>().fetchWisataBaru();
     super.initState();
   }
 

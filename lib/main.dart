@@ -10,8 +10,6 @@ import 'package:smart_tourism/ui/pages/mainpage.dart';
 import 'package:smart_tourism/ui/pages/signup.dart';
 import 'package:smart_tourism/ui/pages/splash.dart';
 
-import 'cubit/wisata_baru_cubit.dart';
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -33,9 +31,6 @@ class SmartTourism extends StatelessWidget {
         BlocProvider(
           create: (context) => WisataCubit(),
         ),
-        BlocProvider(
-          create: (context) => WisataBaruCubit(),
-        )
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
