@@ -6,14 +6,25 @@ import 'package:smart_tourism/ui/widgets/themebutton.dart';
 import 'package:smart_tourism/ui/widgets/themeinput.dart';
 
 // ignore: must_be_immutable
-class Signup extends StatelessWidget {
+class Signup extends StatefulWidget {
+  @override
+  _SignupState createState() => _SignupState();
+}
+
+class _SignupState extends State<Signup> {
+  bool _obscureText = true;
+
   final TextEditingController usernameController =
       TextEditingController(text: '');
+
   final TextEditingController passwordController =
       TextEditingController(text: '');
+
   final TextEditingController emailController = TextEditingController(text: '');
+
   final TextEditingController alamatController =
       TextEditingController(text: '');
+
   final TextEditingController notelpController =
       TextEditingController(text: '');
 
@@ -46,7 +57,7 @@ class Signup extends StatelessWidget {
             ),
             SizedBox(height: 19),
             TextFormField(
-              obscureText: true,
+              obscureText: _obscureText,
               style: putihTextStyle,
               decoration: InputDecoration(
                 fillColor: kinputColor,
@@ -57,9 +68,16 @@ class Signup extends StatelessWidget {
                 ),
                 hintText: 'Password',
                 hintStyle: abuTextStyle,
-                suffixIcon: Icon(
-                  Icons.visibility,
-                  color: kabuColor,
+                suffixIcon: new GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      _obscureText = !_obscureText;
+                    });
+                  },
+                  child: new Icon(
+                    _obscureText ? Icons.visibility : Icons.visibility_off,
+                    color: kabuColor,
+                  ),
                 ),
               ),
               controller: passwordController,
