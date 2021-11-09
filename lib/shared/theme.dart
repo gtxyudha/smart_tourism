@@ -8,6 +8,10 @@ Color kbackgroundColor = Color(0xff181A20);
 Color kabuColor = Color(0xff6F7075);
 Color kinputColor = Color(0xff262A34);
 
+TextStyle primaryTextStyle = GoogleFonts.poppins(
+  color: kPrimaryColor,
+);
+
 TextStyle putihTextStyle = GoogleFonts.poppins(
   color: kputihColor,
 );

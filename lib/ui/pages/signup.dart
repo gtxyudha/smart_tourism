@@ -128,7 +128,7 @@ class _SignupState extends State<Signup> {
               },
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 11, left: 60),
+              padding: const EdgeInsets.only(top: 11, left: 30),
               child: Row(
                 children: [
                   Text(

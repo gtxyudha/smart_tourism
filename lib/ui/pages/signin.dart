@@ -117,7 +117,7 @@ class _SignInState extends State<SignIn> {
             ),
             SizedBox(height: 11),
             Padding(
-              padding: const EdgeInsets.only(left: 80),
+              padding: const EdgeInsets.only(left: 30),
               child: Row(
                 children: [
                   Text(

@@ -5,7 +5,7 @@ import 'package:smart_tourism/shared/theme.dart';
 import 'package:smart_tourism/ui/pages/home.dart';
 import 'package:smart_tourism/ui/pages/order.dart';
 import 'package:smart_tourism/ui/pages/settings.dart';
-import 'package:smart_tourism/ui/pages/souvenir.dart';
+import 'package:smart_tourism/ui/pages/produk.dart';
 import 'package:smart_tourism/ui/widgets/themebottomnavigation.dart';
 
 class MainPage extends StatelessWidget {
@@ -16,7 +16,7 @@ class MainPage extends StatelessWidget {
         case 0:
           return Home();
         case 1:
-          return Souvenir();
+          return Produk();
         case 2:
           return Order();
         case 3:
