@@ -14,7 +14,7 @@ class ProdukModel extends Equatable {
     this.penjual = '',
     this.imageUrl = '',
     this.deskripsi = '',
-    this.harga = 0.0,
+    this.harga = 0,
   });
 
   factory ProdukModel.fromJson(String id, Map<String, dynamic> json) =>
@@ -28,5 +28,12 @@ class ProdukModel extends Equatable {
       );
 
   @override
-  List<Object?> get props => [id, nama, penjual, imageUrl, deskripsi, harga];
+  List<Object?> get props => [
+        id,
+        nama,
+        penjual,
+        imageUrl,
+        deskripsi,
+        harga,
+      ];
 }

@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:smart_tourism/cubit/produk_cubit.dart';
 import 'package:smart_tourism/models/produk_model.dart';
+import 'package:smart_tourism/models/user_model.dart';
 import 'package:smart_tourism/shared/theme.dart';
 import 'package:smart_tourism/ui/widgets/themebutton.dart';
 
+// ignore: must_be_immutable
 class DetailProduk extends StatelessWidget {
   final ProdukModel produk;
+  UserModel? user;
+  int? index;
 
-  const DetailProduk(this.produk, {Key? key}) : super(key: key);
+  DetailProduk(this.produk, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -152,7 +157,22 @@ class DetailProduk extends StatelessWidget {
                   // NOTE: ADD to cart
                   ThemeButton(
                     title: 'Add to Cart',
-                    onPressed: () {},
+                    onPressed: () {
+                      ProdukCubit.get(context).addToCart(
+                        deskripsi: produk.deskripsi.toString(),
+                        imageUrl: produk.imageUrl.toString(),
+                        namaproduk: produk.nama.toString(),
+                        penjual: produk.penjual.toString(),
+                        harga: produk.harga.toDouble(),
+                        produkuserid: '${produk.id}',
+                        idproduk: produk.id.toString(),
+                      );
+                      ProdukCubit.get(context).updateUserCartTotal(
+                        total:
+                            (ProdukCubit.get(context).user!.cartTotal!.toInt() +
+                                produk.harga.toInt()),
+                      );
+                    },
                     width: 170,
                   ),
                 ],

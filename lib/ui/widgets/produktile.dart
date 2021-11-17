@@ -5,6 +5,7 @@ import 'package:smart_tourism/ui/pages/detailproduk.dart';
 
 class ProdukTile extends StatelessWidget {
   final ProdukModel produk;
+
   const ProdukTile(
     this.produk, {
     Key? key,
@@ -17,7 +18,9 @@ class ProdukTile extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => DetailProduk(produk),
+            builder: (context) => DetailProduk(
+              produk,
+            ),
           ),
         );
       },
@@ -64,7 +67,7 @@ class ProdukTile extends StatelessWidget {
                   )
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),

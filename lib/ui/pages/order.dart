@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:smart_tourism/cubit/produk_cubit.dart';
+import 'package:smart_tourism/models/cart_model.dart';
 import 'package:smart_tourism/shared/theme.dart';
-import 'package:smart_tourism/ui/widgets/cardlist.dart';
+import 'package:smart_tourism/ui/widgets/cartproductitem.dart';
 import 'package:smart_tourism/ui/widgets/themebutton.dart';
 
+// ignore: must_be_immutable
 class Order extends StatelessWidget {
-  const Order({Key? key}) : super(key: key);
+  CartDataModel? cart;
+  Order({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    ProdukCubit.get(context).getCartItems();
     return Scaffold(
       backgroundColor: kbackgroundColor,
       body: Padding(
@@ -23,15 +28,26 @@ class Order extends StatelessWidget {
                   )),
             ),
             SizedBox(height: 30),
-            Cardlist(
-              'assets/serabi_notosuman.jpeg',
-              'assets/min_icon.png',
-              '1',
-              'assets/plus_icon.png',
-              'Serabi Notosuman',
-              'Ny. Lidya',
-              'Rp. 26.000',
+            Expanded(
+              child: ListView.separated(
+                itemBuilder: (BuildContext context, int index) {
+                  return CartProductItem(ProdukCubit.get(context).cart[index]);
+                },
+                separatorBuilder: (BuildContext context, int index) {
+                  return const SizedBox(height: 10.0);
+                },
+                itemCount: ProdukCubit.get(context).cart.length,
+              ),
             ),
+            // Cardlist(
+            //   '${cart!.imageUrl}',
+            //   'assets/min_icon.png',
+            //   '1',
+            //   'assets/plus_icon.png',
+            //   '${cart!.namaproduk}',
+            //   '${cart!.penjual}',
+            //   '${cart!.harga}',
+            // ),
             SizedBox(height: 26),
             Container(
               width: 400,

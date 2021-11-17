@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 
+// ignore: must_be_immutable
 class UserModel extends Equatable {
   final String iduser;
   final String username;
@@ -7,6 +8,7 @@ class UserModel extends Equatable {
   final String alamat;
   final String notelp;
   final String foto;
+  double? cartTotal;
 
   UserModel({
     required this.iduser,
@@ -15,8 +17,20 @@ class UserModel extends Equatable {
     required this.alamat,
     required this.notelp,
     this.foto = '',
+    this.cartTotal = 0,
   });
 
+  factory UserModel.fromJson(String id, Map<String, dynamic> json) => UserModel(
+        iduser: id,
+        email: json['email'],
+        alamat: json['alamat'],
+        username: json['username'],
+        notelp: json['notelp'],
+        foto: json['foto'],
+        //cartTotal: json['kel'],
+      );
+
   @override
-  List<Object?> get props => [iduser, email, username, alamat, notelp, foto];
+  List<Object?> get props =>
+      [iduser, email, username, alamat, notelp, foto, cartTotal];
 }
