@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_tourism/cubit/auth_cubit.dart';
+// import 'package:smart_tourism/cubit/cart_cubit.dart';
 import 'package:smart_tourism/cubit/page_cubit.dart';
 import 'package:smart_tourism/cubit/produk_cubit.dart';
 import 'package:smart_tourism/cubit/wisata_cubit.dart';

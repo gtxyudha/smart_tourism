@@ -165,7 +165,7 @@ class DetailProduk extends StatelessWidget {
                         penjual: produk.penjual.toString(),
                         harga: produk.harga.toDouble(),
                         produkuserid: '${produk.id}',
-                        idproduk: produk.id.toString(),
+                        produkid: produk.id.toString(),
                       );
                       ProdukCubit.get(context).updateUserCartTotal(
                         total:

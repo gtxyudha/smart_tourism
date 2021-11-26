@@ -8,7 +8,7 @@ class UserModel extends Equatable {
   final String alamat;
   final String notelp;
   final String foto;
-  double? cartTotal;
+  int? cartTotal;
 
   UserModel({
     required this.iduser,
@@ -17,7 +17,7 @@ class UserModel extends Equatable {
     required this.alamat,
     required this.notelp,
     this.foto = '',
-    this.cartTotal = 0,
+    this.cartTotal,
   });
 
   factory UserModel.fromJson(String id, Map<String, dynamic> json) => UserModel(
@@ -27,10 +27,28 @@ class UserModel extends Equatable {
         username: json['username'],
         notelp: json['notelp'],
         foto: json['foto'],
-        //cartTotal: json['kel'],
+        cartTotal: json['cartTotal'],
       );
 
+  Map<String, dynamic> toMap() {
+    return {
+      'iduser': iduser,
+      'email': email,
+      'alamat': alamat,
+      'notelp': notelp,
+      'foto': foto,
+      'cartTotal': cartTotal,
+    };
+  }
+
   @override
-  List<Object?> get props =>
-      [iduser, email, username, alamat, notelp, foto, cartTotal];
+  List<Object?> get props => [
+        iduser,
+        email,
+        username,
+        alamat,
+        notelp,
+        foto,
+        cartTotal,
+      ];
 }

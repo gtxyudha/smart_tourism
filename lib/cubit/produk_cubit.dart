@@ -33,7 +33,7 @@ class ProdukCubit extends Cubit<ProdukState> {
     required String namaproduk,
     required String penjual,
     required double harga,
-    String? idproduk,
+    required String produkid,
     required String produkuserid,
     String? userid,
     int? counter,
@@ -45,7 +45,7 @@ class ProdukCubit extends Cubit<ProdukState> {
       penjual,
       harga,
       userid = FirebaseAuth.instance.currentUser!.uid,
-      idproduk,
+      produkid,
       counter = 1,
     );
 
